@@ -8,7 +8,18 @@
 
 - -Object.Create()
 
-![](https://firebasestorage.googleapis.com/v0/b/hotelbooking-7127d.appspot.com/o/review-33-js%2Freview-1.png?alt=media&token=c16ccf31-8d69-49d4-a763-b28ac8df8472)
+```js
+var cat = {
+  eat: function () {
+    console.log(this.eatFood)
+  }
+}
+
+var tom = Object.create(cat)
+console.log(cat.isPrototypeOf(tom)) // true
+tom.eatFood = 'banana'
+tom.eat() // banana
+```
 
 1. Tạo object _cat_ sử dụng object literal syntax.
 2. Khởi tạo _tom_ với Object.create(_cat_) có prototype của _cat_
