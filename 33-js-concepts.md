@@ -44,7 +44,7 @@ tom.say() // I love banana
 1. Tạo prototype object *cat* có method *eat* sử dụng object literal syntax.
 2. Dùng **Object.create(cat)** tạo mới object *tom* kế thừa prototype object của *cat*
 
-![tom-prototype](https://firebasestorage.googleapis.com/v0/b/hotelbooking-7127d.appspot.com/o/review-33-js%2FScreen%20Shot%202019-06-11%20at%2010.25.41.png?alt=media&token=a386aba1-b551-45d9-99bf-7b6878d858b9)
+![tom-prototype](https://github.com/luuvinhhung/review-33-js-concepts/blob/master/Screen%20Shot%202019-06-11%20at%2010.25.41.png?raw=true)
 
 3. Kiểm tra *tom* với prototype của *cat*
 4. Gán giá trị property food của *tom*
