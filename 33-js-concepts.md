@@ -41,7 +41,7 @@ tom.eat() // banana
 tom.say() // I love banana
 ```
 
-- Step by step:
+Step by step:
 
 1. Tạo prototype object *cat* có method *eat* sử dụng object literal syntax.
 
@@ -150,7 +150,7 @@ console.log(jerry.namePrototype) // 'eat-prototype'
 
 ### Clone a Javascript object
 
-#### Object.assign() method
+#### Object.assign()
 
 Object.assign() sẽ sao chép những thuộc tính của một hay nhiều object nguồn (sources) qua đối tượng đích (target).
 
@@ -181,7 +181,7 @@ objCopy.sayHi() // 'Hi'
 objCopy.sayBye() // 'bye!'
 ```
 
-Nhược điểm: trong đoạn code sau
+Nhược điểm: Khi có object lồng nhau như trong đoạn code sau *newObj.b* và *obj.b* đều reference đến cùng một object nên những thay đổi thuộc tính object đó sẽ ảnh hưởng đến tất cả:
 
 ```js
 let obj = {
@@ -193,11 +193,11 @@ let obj = {
 let newObj = Object.assign({}, obj)
 
 newObj.a = 20
-console.log(obj) // { a: 10, b: { c: 2} }
-console.log(newObj) // { a: 20, b: { c: 2} }
+console.log(obj) // { a: 10, b: { c: 2 } }
+console.log(newObj) // { a: 20, b: { c: 2 } }
 
 newObj.b.c = 30
-console.log(obj) // { a: 10, b: { c: 30} }
+console.log(obj) // { a: 10, b: { c: 30 } }
 console.log(newObj) // { a: 20, b: { c: 30} }
 ```
 
@@ -308,7 +308,9 @@ Steps:
 
 ### .filter()
 
-Method filter sẽ tạo một array mới chứa các phần tử thoả điều kiện – callback function return true. Filter method nhận một callback với các arguments sau:
+>The filter array method creates a new array with all elements that pass the test implemented by the provided function.
+
+Method filter sẽ **tạo một array mới** chứa các phần tử thoả điều kiện – callback function return boolean value, nếu không có phần tử thỏa điều điện sẽ trả về mảng rỗng. Filter method nhận một callback với các arguments sau:
 
 * **element** – phần tử hiện tại đang kiểm tra trong array ban đầu
 * **index**- index (vị trí) của phần tử hiện tại trong array ban đầu (optional)
@@ -327,7 +329,17 @@ const iceCreams = [
   { flavor: 'mango', color: 'yellow' },
   { flavor: 'pear', color: 'green' }
 ]
-const favoriteFlavors = iceCreams.filter(iceCream =>   iceCream.color === 'red')
+const favoriteFlavors = iceCreams.filter(iceCream => iceCream.color === 'red')
+console.log(favoriteFlavors)
+// [ { flavor: 'strawberry', color: 'red' },
+//  { flavor: 'watermelon', color: 'red' }
+```
+
+Ví dụ trên sử dụng anonymous function, ta cũng có thể dùng named function như sau:
+
+```js
+const getRed = icecream => icecream.color === 'red'
+const favoriteFlavors = iceCreams.filter(getRed)
 console.log(favoriteFlavors)
 // [ { flavor: 'strawberry', color: 'red' },
 //  { flavor: 'watermelon', color: 'red' }
@@ -335,7 +347,11 @@ console.log(favoriteFlavors)
 
 ### .map()
 
-.map() cũng nhận callback như một argument và trả về một array mới chứa các phần tử đã được transform và cùng số lượng phần tử array ban đầu.
+.map() nhận callback và trả về **một array mới** có các phần tử là kết quả của việc xử lý từng phần tử của array gốc và cùng số lượng phần tử array ban đầu. Callback thay đổi phần tử của array gốc, với các arguments sau:
+
+* **element** – phần tử hiện tại đang kiểm tra trong array ban đầu
+* **index**- index (vị trí) của phần tử hiện tại trong array ban đầu (optional)
+* **array**- array đang dùng để map (optional)
 
 ![map](https://cdn-images-1.medium.com/max/1200/1*BkcYRGvVCLfOBYqDP2SBXg.png)
 
@@ -364,15 +380,68 @@ console.log(flavors)
 //   { flavor: 'pear', fruit: true } ]
 ```
 
+Trong ví dụ trên với mỗi phần tử của array iceCreams ta destructuring thành color và ...rest:
+>const { color, ...rest } = icecream
+
+Sau cùng return một object với property là *flavor* và *fruit*
+
 ### .reduce()
 
-* .reduce() thực hiện và lưu kết quả hiện tại vào **accumulator**
+* Sau khi thực hiện kết quả tích lũy của callback hiện tại hoặc giá trị ban đầu vào **accumulator**
 * **currentValue**: phần tử hiện tại đang được xử lý trong array.
 * **currentIndex**: bắt đầu tại 0, nếu giá trị initialValue được cung cấp và nếu không được cung cấp thì bắt đầu ở tại 1 (optional)
 * **array**: mảng được method reduce() gọi (optional)
 * **initialValue**: Giá trị để sử dụng làm đối số đầu tiên cho lần thực hiện đầu tiên. Nếu không có giá trị ban đầu nào được cung cấp, mặc định sẽ lấy phần tử đầu tiên trong array.
 
 ![reduce](https://cdn-images-1.medium.com/max/1200/1*mQrjP0aMK7xY1_SSHO2kjg.png)
+Example: tính tổng các phần tử trong array với initial value là phần tử đầu tiên
+
+```js
+const arr = [10, 20, 30]
+const sum = arr.reduce((acc, currentItem) => acc + currentItem)
+console.log(sum)
+```
+
+Ta có thể sử dụng reduce() thay thế cho map(),
+
+Example:
+
+```js
+const data = [10, 20, 30]
+const tripledWithMap = data.map(item => {
+    return item * 3
+})
+
+const tripledWithReduce = data.reduce((acc, value) => {
+    acc.push(value * 3)
+    return acc
+}, [])
+console.log(tripledWithMap, tripledWithReduce)
+// [ 30, 60, 90 ] [ 30, 60, 90 ]
+```
+
+hay thay thế cho cả filter().
+
+Example:
+
+```js
+const data2 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+const evenWithFilter = data2.filter(item => {
+    return item % 2 === 0
+})
+const evenWithReduce = data2.reduce((acc, value) => {
+    if (value % 2 === 0) {
+        acc.push(value)
+    }
+    return acc
+}, [])
+console.log(evenWithFilter, evenWithReduce)
+// [ 2, 4, 6, 8, 10 ] [ 2, 4, 6, 8, 10 ]
+```
+
+Một số trường hợp có thể dùng reduce()
+
+* Đếm các instances của các giá trị trong array và trả về dưới dạng một object
 
 Example:
 
@@ -389,13 +458,28 @@ const flavours = [
   'banana'
 ]
 const votes = {}
-const reducer = (votes, vote) => {
-  votes[vote] = !votes[vote] ? (votes[vote] = 1) : votes[vote] + 1
+const reducer = (votes, item) => {
+  votes[item] = !votes[item] ? (votes[item] = 1) : votes[item] + 1
   return votes
 }
 const outcome = flavours.reduce(reducer, votes)
 console.log(outcome)
 // { strawberry: 3, kiwi: 4, mango: 1, banana: 1 }
+```
+
+* Convert nhiều array thành một
+
+Example:
+
+```js
+const letterArr = [['a', 'b', 'c'], ['d', 'e', 'f'], ['g', 'h', 'i']]
+const flattened = letterArr.reduce((acc, val) => {
+    return acc.concat(val)
+    // Spread
+    // return [...acc, ...val]
+}, [])
+console.log(flattened)
+// [ 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i' ]
 ```
 
 ### References:
