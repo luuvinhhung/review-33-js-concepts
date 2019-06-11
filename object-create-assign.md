@@ -108,6 +108,8 @@ tom.eat() // banana
 
 Khi dùng *new* là tạo mới một object và thực thi constructor với 'this' gắn với object vừa được tạo đồng thời kế thừa prototype của constructor function
 
+### Difference between Object.create() and the *new* operator
+
 ```js
 function Cat () {
   this.name = 'Tom'
@@ -127,11 +129,11 @@ console.log(jerry.namePrototype) // 'eat-prototype'
 
 > This is due to the important difference that *new*  actually runs constructor code, whereas Object.create will not execute the constructor code.(Jonathan Voxland)
 
-## Shallow copy objects
+## Clone a Javascript object
 
 ### Object.assign() method
 
-Object.assign() sẽ copy properties và gía trị từ một hay nhiều object
+Object.assign() sẽ shallow copy từ một hay nhiều object
 
 ```js
 let obj = {
@@ -150,10 +152,10 @@ let obj2 = {
 }
 let objCopy = Object.assign({}, obj, obj2)
 
-console.log(objCopy) // result - { a: 3, b: 2, c: 4 }
+console.log(objCopy) // { a: 3, b: 2, c: 4 }
 objCopy.b = 23
-console.log(objCopy) // result - { a: 3, b: 23, c: 4 }
-console.log(obj) // result - { a: 1, b: 2 }
+console.log(objCopy) // { a: 3, b: 23, c: 4 }
+console.log(obj) // { a: 1, b: 2 }
 objCopy.sayHi() // 'Hi'
 objCopy.sayBye() // 'bye!'
 ```
@@ -168,11 +170,6 @@ let obj = {
   }
 }
 let newObj = Object.assign({}, obj)
-console.log(newObj) // { a: 1, b: { c: 2} }
-
-obj.a = 10
-console.log(obj) // { a: 10, b: { c: 2} }
-console.log(newObj) // { a: 1, b: { c: 2} }
 
 newObj.a = 20
 console.log(obj) // { a: 10, b: { c: 2} }
@@ -205,28 +202,11 @@ console.log(obj) // { one: 1, two: 2, three: { four: 5 } }
 console.log(newObj) // { one: 1, two: 2, three: { four: 5 } }
 ```
 
-## Deep copy objects
+### JSON serialization
 
-### JSON.parse(JSON.stringify(object))
+> **JSON.parse(JSON.stringify(object))**
 
-Cách copy này sẽ hoàn toàn copy object chứ không reference. Ex:
-
-```js
-let obj = {
-  a: 1,
-  b: {
-    c: 2
-  }
-}
-
-let newObj = JSON.parse(JSON.stringify(obj))
-
-obj.b.c = 20
-console.log(obj) // { a: 1, b: { c: 20 } }
-console.log(newObj) // { a: 1, b: { c: 2 } }
-```
-
-Nhược điểm: cách copy này không thể copy methods của object
+Cách này có thể deep copy object reference đến object khác (inner object). Tuy nhiên nhược điểm là không thể copy những kiểu không thể chuyển sang JSON như Function hay Infinity.
 
 ```js
 let obj = {
@@ -236,10 +216,10 @@ let obj = {
   }
 }
 // Object.assign({}, obj)
-let method1 = Object.assign({}, obj)
-console.log(method1) // { name: 'Tom', sayHi: [Function: sayHi] }
+let newObj1 = Object.assign({}, obj)
+console.log(newObj1) // { name: 'Tom', sayHi: [Function: sayHi] }
 
 // JSON.parse(JSON.stringify(obj))
-let method2 = JSON.parse(JSON.stringify(obj))
-console.log(method2) // { name: 'Tom' }
+let newObj2 = JSON.parse(JSON.stringify(obj))
+console.log(newObj2) // { name: 'Tom' }
 ```

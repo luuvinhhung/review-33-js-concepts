@@ -1,14 +1,13 @@
-function Cat () {
-  this.food = 'banana'
+let obj = {
+  name: 'Tom',
+  sayHi: function () {
+    return true
+  }
 }
+// Object.assign({}, obj)
+let newObj1 = Object.assign({}, obj)
+console.log(newObj1) // { name: 'Tom', sayHi: [Function: sayHi] }
 
-Cat.prototype.eat = 'eat-prototype'
-// Using New Keyword
-var tom = new Cat()
-console.log(tom.food) // Tom
-console.log(tom.eat) // 'eat-prototype'
-
-// Using Object.create()
-var jerry = Object.create(Cat.prototype)
-console.log(jerry.food) // undefined
-console.log(jerry.eat) // 'eat-prototype'
+// JSON.parse(JSON.stringify(obj))
+let newObj2 = JSON.parse(JSON.stringify(obj))
+console.log(newObj2) // { name: 'Tom' }
