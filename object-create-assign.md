@@ -20,10 +20,11 @@ console.log(cat.isPrototypeOf(tom)) // true
 tom.eatFood = 'banana'
 tom.eat() // banana
 ```
-
-1. Tạo object *cat* sử dụng object literal syntax.
-2. Khởi tạo *tom* với Object.create(*cat*) có prototype của *cat*
-3. Kiểm tra biến *tom* với prototype của *cat*
+- Step by step:
+1. Tạo object literal *cat* có method *eat* .
+2. Khởi tạo *tom* với **Object.create(cat)** với prototype object của *cat*
+![tom-prototype](https://firebasestorage.googleapis.com/v0/b/hotelbooking-7127d.appspot.com/o/review-33-js%2FScreen%20Shot%202019-06-11%20at%2010.25.41.png?alt=media&token=cfb0e125-0a00-410d-8459-92ef023c99f3)
+3. Kiểm tra *tom* với prototype của *cat*
 4. Gán giá trị vào *this.eatFood*
 5. Gọi function eat()
 6. JS dùng prototype chain tìm method eat trong cat với *this* đang là *tom*
