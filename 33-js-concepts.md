@@ -8,11 +8,11 @@
 
 ## 18. Object.create and Object.assign
 
-### Questions
+### Contents
 
-- Tạo object với Object.create() và new keyword
-- Shallow copy objects với Object.assign(), Spread
-- Deep copy objects JSON serialization
+* [Object.create() và new keyword](#Objectcreate---new-operator)
+
+* [Object.assign(), Spread, JSON serialization](#Clone-a-Javascript-object)
 
 ### Object.create() - *new* operator
 
@@ -88,7 +88,7 @@ Trong đó:
 * **enumerable**: mặc định là false, nếu bằng true, thuộc tính này có thể được truy xuất khi dùng for...in hoặc Object.keys().
 
 * **get**: trả về giá trị của thuộc tính, hoặc undefined nếu không được khai báo.
-* *set*: nhận giá trị cho thuộc tính.
+* **set**: nhận giá trị cho thuộc tính.
 
 Có thể sử dụng **Object.create()** tạo mới một object kế thừa *tom* có thể sử dụng method của cả *tom* và *cat*. Ex:
 
@@ -258,10 +258,11 @@ console.log(newObj2) // { name: 'Tom' }
 
 ## 19. Functional Programming in JS: map, filter, reduce
 
-### Questions
+### Contents
 
-* Higher Order Function
-* .map() - .filter() - .reduce()
+* Higher-Order Functions
+
+* Object.assign(), Spread, JSON serialization
 
 ### Higher-Order Functions
 
@@ -389,5 +390,13 @@ console.log(outcome)
 
 ### References:
 [📜 Functional Programming in JS: map, filter, reduce (Pt. 5) — Omer Goldberg](https://hackernoon.com/functional-programming-in-js-map-filter-reduce-pt-5-308a205fdd5f)
+
+[📜 JavaScript Functional Programming — map, filter and reduce — Bojan Gvozderac](https://medium.com/jsguru/javascript-functional-programming-map-filter-and-reduce-846ff9ba492d)
+
+[📜 Learn map, filter and reduce in Javascript — João Miguel Cunha](https://medium.com/@joomiguelcunha/learn-map-filter-and-reduce-in-javascript-ea59009593c4)
+
+[📜 JavaScript’s Map, Reduce, and Filter — Dan Martensen](https://danmartensen.svbtle.com/javascripts-map-reduce-and-filter)
+
+[📜 How to Use Map, Filter, & Reduce in JavaScript — Peleke Sengstacke](https://code.tutsplus.com/tutorials/how-to-use-map-filter-reduce-in-javascript--cms-26209)
 
 **[⬆ Back to Top](#table-of-contents)**
