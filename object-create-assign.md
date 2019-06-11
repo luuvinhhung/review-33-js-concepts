@@ -6,7 +6,10 @@
 - Shallow copy objects với Object.assign(), Spread
 - Deep copy objects
 
-## Object.Create()
+## Object.create() - *new* operator
+
+### Object.create() - object literal
+> The Object.create() method creates a new object, using an existing object as the prototype of the newly created object. - MDN
 
 ```js
 var cat = {
@@ -17,11 +20,18 @@ var cat = {
 
 var tom = Object.create(cat)
 console.log(cat.isPrototypeOf(tom)) // true
+
 tom.food = 'banana'
+tom.say = function () {
+  console.log(`I love ${this.food}`)
+}
+
 tom.eat() // banana
+tom.say() // I love banana
 ```
 
 - Step by step:
+
 1. Tạo prototype object *cat* có method *eat* sử dụng object literal syntax.
 2. Dùng **Object.create(cat)** tạo mới object *tom* kế thừa prototype object của *cat*
 
@@ -29,17 +39,51 @@ tom.eat() // banana
 
 3. Kiểm tra *tom* với prototype của *cat*
 4. Gán giá trị property food của *tom*
-5. Gọi eat(). JS với prototype chain tìm method eat trong *cat* với *this* đang là *tom*
+5. Tạo method *say* cho *tom*
+5. Gọi eat(). JS với **prototype chain** tìm method eat trong *cat* với *this* đang là *tom*
 
-> The Object.create() method creates a new object, using an existing object as the prototype of the newly created object. - MDN
+**Property descriptor** (mô tả thuộc tính) là một object JavaScript, được sử dụng trong Object.create() để thay đổi các thuộc tính đã có của một đối tượng, hoặc tạo đối tượng mới. Ex:
+
+```js
+var cat = {
+  eat: function () {
+    console.log(this.food)
+  }
+}
+var tom = Object.create(cat, {
+  food: {
+    get () {
+      return this.value
+    },
+    set (food) {
+      this.value = food
+    },
+    configurable: true,
+    enumerable: true
+  },
+  say: {
+    value: function () {
+      console.log(`I love ${this.food}`)
+    }
+  }
+})
+tom.food = 'banana'
+tom.eat() // banana
+tom.say() // I love banana
+```
+
+Trong đó:
+
+* **configurable**: mặc định là false, nếu bằng true, property descriptor của thuộc tính này có thể được thay đổi, hoặc thuộc tính này có thể được xoá khỏi object.
+
+* **enumerable**: mặc định là false, nếu bằng true, thuộc tính này có thể được truy xuất khi dùng for...in hoặc Object.keys().
+
+* **get**: trả về giá trị của thuộc tính, hoặc undefined nếu không được khai báo.
+* *set*: nhận giá trị cho thuộc tính.
 
 Có thể sử dụng **Object.create()** tạo mới một object kế thừa *tom* có thể sử dụng method của cả *tom* và *cat*. Ex:
-```js
-tom.say = function () {
-  console.log(`I love ${this.food}`)
-}
-tom.say() // I love banana
 
+```js
 var superTom = Object.create(tom)
 console.log(cat.isPrototypeOf(superTom)) // true
 superTom.food = 'noodle'
@@ -47,7 +91,22 @@ superTom.eat() // noodle
 superTom.say() // I love noodle
 ```
 
-## Create object with *new* keyword
+### *new* operator - constructor function
+
+```js
+function Cat () {
+  this.food = 'banana'
+  this.eat = function () {
+    console.log(this.food)
+  }
+}
+
+var tom = new Cat()
+console.log(tom instanceof Cat) // True
+tom.eat() // banana
+```
+
+Khi dùng *new* là tạo mới một object và thực thi constructor với 'this' gắn với object vừa được tạo đồng thời kế thừa prototype của constructor function
 
 ```js
 function Cat () {
@@ -66,7 +125,7 @@ console.log(jerry.name) // undefined
 console.log(jerry.namePrototype) // 'eat-prototype'
 ```
 
-Cả hai cách đều tạo object mới và kế thừa prototype,… Điểm khác nhau là Object.create() sẽ không có this.name trong constructor là do Object.create() không thực thi constructor function, trái lại khi tạo với từ khoá *new* sẽ thực thi constructor.
+> This is due to the important difference that *new*  actually runs constructor code, whereas Object.create will not execute the constructor code.(Jonathan Voxland)
 
 ## Shallow copy objects
 

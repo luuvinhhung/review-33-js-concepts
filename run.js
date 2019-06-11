@@ -1,21 +1,14 @@
-var cat = {
-  eat: function () {
-    console.log(this.food)
-  }
+function Cat () {
+  this.food = 'banana'
 }
 
-var tom = Object.create(cat)
-console.log(cat.isPrototypeOf(tom)) // true
-tom.food = 'banana'
-tom.eat() // banana
+Cat.prototype.eat = 'eat-prototype'
+// Using New Keyword
+var tom = new Cat()
+console.log(tom.food) // Tom
+console.log(tom.eat) // 'eat-prototype'
 
-tom.say = function () {
-  console.log(`I love ${this.food}`)
-}
-tom.say() // I love banana
-
-var superTom = Object.create(tom)
-console.log(cat.isPrototypeOf(superTom)) // true
-superTom.food = 'noodle'
-superTom.eat() // noodle
-superTom.say() // I love noodle
+// Using Object.create()
+var jerry = Object.create(Cat.prototype)
+console.log(jerry.food) // undefined
+console.log(jerry.eat) // 'eat-prototype'
