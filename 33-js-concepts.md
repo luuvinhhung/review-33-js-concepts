@@ -20,6 +20,8 @@
 
 > The Object.create() method creates a new object, using an existing object as the prototype of the newly created object. - MDN
 
+Example:
+
 ```js
 var cat = {
   eat: function () {
@@ -42,16 +44,22 @@ tom.say() // I love banana
 - Step by step:
 
 1. Tạo prototype object *cat* có method *eat* sử dụng object literal syntax.
+
 2. Dùng **Object.create(cat)** tạo mới object *tom* kế thừa prototype object của *cat*
 
 ![tom-prototype](https://github.com/luuvinhhung/review-33-js-concepts/blob/master/Screen%20Shot%202019-06-11%20at%2010.25.41.png?raw=true)
 
 3. Kiểm tra *tom* với prototype của *cat*
-4. Gán giá trị property food của *tom*
-5. Tạo method *say* cho *tom*
-5. Gọi eat(). JS với **prototype chain** tìm method eat trong *cat* với *this* đang là *tom*
 
-**Property descriptor** (mô tả thuộc tính) là một object JavaScript, được sử dụng trong Object.create() để thay đổi các thuộc tính đã có của một đối tượng, hoặc tạo đối tượng mới. Ex:
+4. Gán giá trị property food của *tom*
+
+5. Tạo method *say* cho *tom*
+
+6. Gọi eat(). JS với **prototype chain** tìm method eat trong *cat* với *this* đang là *tom*
+
+**Property descriptor** (mô tả thuộc tính) là một object JavaScript, được sử dụng trong Object.create() để thay đổi các thuộc tính đã có của một đối tượng, hoặc tạo đối tượng mới.
+
+Example:
 
 ```js
 var cat = {
@@ -119,6 +127,8 @@ Khi dùng *new* là tạo mới một object và thực thi constructor với 't
 
 #### Difference between Object.create() and the *new* operator
 
+Example:
+
 ```js
 function Cat () {
   this.name = 'Tom'
@@ -143,6 +153,8 @@ console.log(jerry.namePrototype) // 'eat-prototype'
 #### Object.assign() method
 
 Object.assign() sẽ sao chép những thuộc tính của một hay nhiều object nguồn (sources) qua đối tượng đích (target).
+
+Example:
 
 ```js
 let obj = {
@@ -169,7 +181,7 @@ objCopy.sayHi() // 'Hi'
 objCopy.sayBye() // 'bye!'
 ```
 
-Nhược điểm:
+Nhược điểm: trong đoạn code sau
 
 ```js
 let obj = {
@@ -188,8 +200,6 @@ newObj.b.c = 30
 console.log(obj) // { a: 10, b: { c: 30} }
 console.log(newObj) // { a: 20, b: { c: 30} }
 ```
-
-Trong đoạn code trên *newObj.b* và *obj.b* đều reference đến cùng một object
 
 #### Spread Elements
 
