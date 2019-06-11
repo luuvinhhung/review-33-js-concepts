@@ -11,25 +11,41 @@
 ```js
 var cat = {
   eat: function () {
-    console.log(this.eatFood)
+    console.log(this.food)
   }
 }
 
 var tom = Object.create(cat)
 console.log(cat.isPrototypeOf(tom)) // true
-tom.eatFood = 'banana'
+tom.food = 'banana'
 tom.eat() // banana
 ```
+
 - Step by step:
-1. Tạo object literal *cat* có method *eat* .
-2. Khởi tạo *tom* với **Object.create(cat)** với prototype object của *cat*
+1. Tạo prototype object *cat* có method *eat* sử dụng object literal syntax.
+2. Dùng **Object.create(cat)** tạo mới object *tom* kế thừa prototype object của *cat*
 
 ![tom-prototype](https://firebasestorage.googleapis.com/v0/b/hotelbooking-7127d.appspot.com/o/review-33-js%2FScreen%20Shot%202019-06-11%20at%2010.25.41.png?alt=media&token=a386aba1-b551-45d9-99bf-7b6878d858b9)
 
 3. Kiểm tra *tom* với prototype của *cat*
-4. Gán giá trị vào *this.eatFood*
-5. Gọi function eat()
-6. JS dùng prototype chain tìm method eat trong cat với *this* đang là *tom*
+4. Gán giá trị property food của *tom*
+5. Gọi eat(). JS với prototype chain tìm method eat trong *cat* với *this* đang là *tom*
+
+> The Object.create() method creates a new object, using an existing object as the prototype of the newly created object. - MDN
+
+Có thể sử dụng **Object.create()** tạo mới một object kế thừa *tom* có thể sử dụng method của cả *tom* và *cat*. Ex:
+```js
+tom.say = function () {
+  console.log(`I love ${this.food}`)
+}
+tom.say() // I love banana
+
+var superTom = Object.create(tom)
+console.log(cat.isPrototypeOf(superTom)) // true
+superTom.food = 'noodle'
+superTom.eat() // noodle
+superTom.say() // I love noodle
+```
 
 ## Create object with *new* keyword
 
