@@ -23,7 +23,9 @@ tom.eat() // banana
 - Step by step:
 1. Tạo object literal *cat* có method *eat* .
 2. Khởi tạo *tom* với **Object.create(cat)** với prototype object của *cat*
-![tom-prototype](https://firebasestorage.googleapis.com/v0/b/hotelbooking-7127d.appspot.com/o/review-33-js%2FScreen%20Shot%202019-06-11%20at%2010.25.41.png?alt=media&token=cfb0e125-0a00-410d-8459-92ef023c99f3)
+
+![tom-prototype](https://firebasestorage.googleapis.com/v0/b/hotelbooking-7127d.appspot.com/o/review-33-js%2FScreen%20Shot%202019-06-11%20at%2010.25.41.png?alt=media&token=a386aba1-b551-45d9-99bf-7b6878d858b9)
+
 3. Kiểm tra *tom* với prototype của *cat*
 4. Gán giá trị vào *this.eatFood*
 5. Gọi function eat()
