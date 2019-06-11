@@ -2,13 +2,14 @@
 
 ## Questions
 
-- Create object với Object.create() và new keyword
+- Tạo object với Object.create() và new keyword
 - Shallow copy objects với Object.assign(), Spread
-- Deep copy objects
+- Deep copy objects JSON serialization
 
 ## Object.create() - *new* operator
 
 ### Object.create() - object literal
+
 > The Object.create() method creates a new object, using an existing object as the prototype of the newly created object. - MDN
 
 ```js
@@ -37,7 +38,7 @@ tom.say() // I love banana
 
 ![tom-prototype](https://firebasestorage.googleapis.com/v0/b/hotelbooking-7127d.appspot.com/o/review-33-js%2FScreen%20Shot%202019-06-11%20at%2010.25.41.png?alt=media&token=a386aba1-b551-45d9-99bf-7b6878d858b9)
 
-3. Kiểm tra *tom* với prototype của *cat*
+3. a: Kiểm tra *tom* với prototype của *cat*
 4. Gán giá trị property food của *tom*
 5. Tạo method *say* cho *tom*
 5. Gọi eat(). JS với **prototype chain** tìm method eat trong *cat* với *this* đang là *tom*
@@ -133,7 +134,7 @@ console.log(jerry.namePrototype) // 'eat-prototype'
 
 ### Object.assign() method
 
-Object.assign() sẽ shallow copy từ một hay nhiều object
+Object.assign() sẽ sao chép những thuộc tính của một hay nhiều object nguồn (sources) qua đối tượng đích (target).
 
 ```js
 let obj = {
