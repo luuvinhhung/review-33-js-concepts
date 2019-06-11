@@ -226,6 +226,7 @@ console.log(newObj2) // { name: 'Tom' }
 ```
 
 ## References
+
 [📜 Object.create() — MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/create)
 
 [📜 Object.create in JavaScript — Rupesh Mishra](https://hackernoon.com/object-create-in-javascript-fa8674df6ed2)
