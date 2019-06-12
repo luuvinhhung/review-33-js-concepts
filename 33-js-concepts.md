@@ -272,7 +272,7 @@ console.log(newObj2) // { name: 'Tom' }
 
 * Higher-Order Functions
 
-* Object.assign(), Spread, JSON serialization
+* .filter() - .map() - .reduce()
 
 ### Higher-Order Functions
 
