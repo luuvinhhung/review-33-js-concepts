@@ -10,7 +10,7 @@
 
 ### Contents
 
-* [Object.create() và new keyword](#Objectcreate---new-operator)
+* [Object.create() và new operator](#Objectcreate---new-operator)
 
 * [Object.assign(), Spread, JSON serialization](#Clone-a-Javascript-object)
 
@@ -173,10 +173,15 @@ let obj2 = {
 }
 let objCopy = Object.assign({}, obj, obj2)
 
-console.log(objCopy) // { a: 3, b: 2, c: 4 }
 objCopy.b = 23
-console.log(objCopy) // { a: 3, b: 23, c: 4 }
-console.log(obj) // { a: 1, b: 2 }
+console.log(objCopy)
+// { a: 3,
+//   b: 23,
+//   sayHi: [Function: sayHi],
+//   c: 4,
+//   sayBye: [Function: sayBye] }
+
+console.log(obj) // { a: 1, b: 2, sayHi: [Function: sayHi] }
 objCopy.sayHi() // 'Hi'
 objCopy.sayBye() // 'bye!'
 ```
@@ -261,7 +266,6 @@ console.log(newObj2) // { name: 'Tom' }
 
 [📜 How to deep clone a JavaScript Object — Flavio Copes](https://flaviocopes.com/how-to-clone-javascript-object/)
 
-
 **[⬆ Back to Top](#table-of-contents)**
 
 <!-- ## 19. map, reduce, filter -->
@@ -276,7 +280,9 @@ console.log(newObj2) // { name: 'Tom' }
 
 ### Higher-Order Functions
 
-Là function nhận function khác làm parameter. Ex:
+Là function nhận function khác làm parameter.
+
+Example:
 
 ```js
 const iceCreams = [
@@ -482,7 +488,10 @@ console.log(flattened)
 // [ 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i' ]
 ```
 
-### References:
+### References
+
+[📜 Higher Order Functions](https://www.lullabot.com/articles/higher-order-functions-in-javascript)
+
 [📜 Functional Programming in JS: map, filter, reduce (Pt. 5) — Omer Goldberg](https://hackernoon.com/functional-programming-in-js-map-filter-reduce-pt-5-308a205fdd5f)
 
 [📜 JavaScript Functional Programming — map, filter and reduce — Bojan Gvozderac](https://medium.com/jsguru/javascript-functional-programming-map-filter-and-reduce-846ff9ba492d)
